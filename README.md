@@ -1,14 +1,14 @@
 # ✨ Aura & Threads
 
-An AI-powered personal styling application that analyzes your selfie using GPT-4o Vision and recommends personalized fashion items from your favorite brands.
+An AI-powered personal styling application that analyzes your selfie using GPT-5.2 Vision and recommends personalized fashion items from your favorite brands.
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/streamlit-latest-red.svg)
-![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o-green.svg)
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--5.2-green.svg)
 
 ## 🌟 Features
 
-- **AI-Powered Analysis**: Uses GPT-4o Vision to analyze your features including skin tone, face shape, and body build
+- **AI-Powered Analysis**: Uses GPT-5.2 Vision to analyze your features including skin tone, face shape, and body build
 - **Personalized Recommendations**: Get tailored outfit suggestions consisting of 3 cohesive items (Top, Bottom, Shoes/Accessory)
 - **Brand-Specific Search**: Search for items from your favorite brands (Zara, Uniqlo, Gucci, etc.)
 - **Real Product Results**: Automatically searches and displays actual products with images and shopping links
@@ -70,7 +70,7 @@ streamlit run app.py
 ## 🛠️ Tech Stack
 
 - **Frontend**: Streamlit
-- **AI Model**: OpenAI GPT-4o Vision
+- **AI Model**: OpenAI GPT-5.2 Vision
 - **Image Search**: DuckDuckGo Image Search (DDGS)
 - **Image Processing**: Pillow
 
@@ -88,7 +88,7 @@ gemini/
 
 ## 🎨 How It Works
 
-1. **Image Analysis**: Your selfie is encoded and sent to GPT-4o Vision
+1. **Image Analysis**: Your selfie is encoded and sent to GPT-5.2 Vision
 2. **AI Styling**: The AI analyzes your features and suggests a cohesive outfit
 3. **Product Search**: Each recommendation is searched using DuckDuckGo
 4. **Display**: Results are displayed with product images and shopping links
@@ -113,7 +113,7 @@ This project is open source and available under the MIT License.
 
 ## 🙏 Acknowledgments
 
-- OpenAI for GPT-4o Vision API
+- OpenAI for GPT-5.2 Vision API
 - Streamlit for the amazing web framework
 - DuckDuckGo for image search capabilities
 
@@ -124,4 +124,5 @@ For questions or feedback, please open an issue on GitHub.
 ---
 
 Made with ❤️ using AI
+
 
