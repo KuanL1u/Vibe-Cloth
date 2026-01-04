@@ -99,7 +99,7 @@ def encode_image(image_file):
 
 def analyze_and_recommend(image_base64, brand, client):
     """
-    1. Sends selfie to GPT-4o.
+    1. Sends selfie to GPT-5.2.
     2. Asks GPT to analyze features (skin tone, face shape).
     3. Asks GPT to generate 3 specific search queries for the Brand.
     """
@@ -163,6 +163,36 @@ def search_product(query, max_retries=3):
                 return None
             # Otherwise continue to retry
     return None
+
+def generate_outfit_image(client, analysis, items, brand):
+    """
+    Generates an AI image of a person wearing the recommended outfit using DALL-E.
+    """
+    # Create a detailed prompt from the analysis and items
+    outfit_descriptions = []
+    for item in items:
+        # Extract the item description from the query (remove brand name)
+        item_desc = item["query"].replace(brand, "").strip()
+        outfit_descriptions.append(f"{item['category']}: {item_desc}")
+    
+    outfit_text = ", ".join(outfit_descriptions)
+    
+    prompt = f"""A professional fashion photograph of a stylish person wearing: {outfit_text}. 
+The person should look confident and fashionable. Studio lighting, clean background, high-end fashion photography style, full body shot."""
+    
+    try:
+        response = client.images.generate(
+            model="dall-e-3",
+            prompt=prompt,
+            size="1024x1024",
+            quality="standard",
+            n=1,
+        )
+        
+        return response.data[0].url
+    except Exception as e:
+        print(f"Image generation error: {e}")
+        return None
 
 # --- MAIN UI ---
 
@@ -245,6 +275,23 @@ if generate_btn and uploaded_file and brand_input and st.session_state.client:
                         """, unsafe_allow_html=True)
                     else:
                         st.warning(f"Could not find exact match for {query}")
+            
+            # 5. Generate AI Image of the Outfit
+            st.markdown("---")
+            st.subheader("🎨 Visualize Your Look")
+            with st.spinner("Generating your personalized outfit visualization..."):
+                generated_image_url = generate_outfit_image(
+                    st.session_state.client, 
+                    ai_data["analysis"], 
+                    ai_data["items"], 
+                    brand_input
+                )
+                
+                if generated_image_url:
+                    st.image(generated_image_url, caption="Your AI-Generated Outfit Visualization", use_column_width=True)
+                    st.info("💡 This is an AI-generated visualization to help you imagine the complete look!")
+                else:
+                    st.warning("Could not generate outfit visualization at this time.")
                         
         except Exception as e:
             st.error(f"An error occurred: {e}")
